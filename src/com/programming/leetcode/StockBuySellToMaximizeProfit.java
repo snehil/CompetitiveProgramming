@@ -27,7 +27,7 @@ public class StockBuySellToMaximizeProfit {
 		int[] stockPrices = {7, 1, 5, 3, 6, 4};
 		determineBuySellPoint(stockPrices);
 	}
-
+	
 	private static void determineBuySellPoint(int[] stockPrices) throws IllegalArgumentException {
 		if (stockPrices == null) {
 			throw new IllegalArgumentException("stockPrices cannot be null");
