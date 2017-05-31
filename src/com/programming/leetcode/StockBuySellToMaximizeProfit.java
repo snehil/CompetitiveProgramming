@@ -37,8 +37,8 @@ public class StockBuySellToMaximizeProfit {
         System.out.println("Stock Prices: " + Arrays.toString(stockPrices));
 
         // Initialize
-        int max = stockPrices[0];
-        int min = stockPrices[0];
+        int max    = stockPrices[0];
+        int min    = stockPrices[0];
         int profit = max - min;
 
         // O(n) time
