@@ -15,7 +15,7 @@ import java.util.Arrays;
  * 
  * Do this in O(n) time.
  * 
- * @author SW029693
+ * @author Snehil
  *
  */
 public class StockBuySellToMaximizeProfit {
