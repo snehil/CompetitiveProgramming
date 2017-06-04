@@ -330,6 +330,7 @@ public class BST<T extends Comparable<T>> {
     
     /**
      * Finds the average of all keys in the {BST}
+     * Time Complexity = O(n+n) = O(2n) = O(n)
      */
     public float findAverage() throws UnsupportedOperationException {
         int sum   = findSum();
