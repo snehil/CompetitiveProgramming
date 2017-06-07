@@ -6,10 +6,9 @@ import java.util.Queue;
 
 /**
  * A generic Binary Search Tree implementation
- * Refernce: http://www.geeksforgeeks.org/binary-search-tree-set-1-search-and-insertion/
+ * Reference: http://www.geeksforgeeks.org/binary-search-tree-set-1-search-and-insertion/
  * 
  * @author Snehil
- * @param <T>
  */
 public class BST<T extends Comparable<T>> {
     
@@ -19,12 +18,12 @@ public class BST<T extends Comparable<T>> {
      * Represents a node in the BST
      */
     public class Node<T extends Comparable<T>> {
-        public T data;
+        public T    data;
         public Node left;
         public Node right;
         
         /**
-         * Constructor
+         * Constructor for type {Node} 
          * 
          * @param item The data to be added to the {BST} Node
          */
@@ -346,8 +345,83 @@ public class BST<T extends Comparable<T>> {
         return avg;
     }
     
+    /**
+     * Prints the {BST} key values that lie in the given range 
+     * Time Complexity = O(n)
+     * 
+     * @param start Lower bound of the range
+     * @param end   Upper bound of the range
+     */
+    public void findInRange(T start, T end) throws NullPointerException {
+        System.out.println(String.format("Find in range %s:%s", start.toString(), end.toString()));
+        findInRangeUtil(start, end, root);
+    }
+    
+    /**
+     * Utility function to print the {BST} key values that lie in the given range
+     * 
+     * @param start Lower bound of the range
+     * @param end   Upper bound of the range
+     * @param node  The {Node} that is being evaluated for range statistics 
+     */
+    private void findInRangeUtil(T start, T end, Node node) throws NullPointerException {
+        if (start == null || end == null) {
+            throw new NullPointerException("range values cannot be null");
+        }
+        
+        if (node == null) {
+            return;
+        }
+        
+        if (node.data.compareTo(start) > 0) {           // Find in right subtree
+            findInRangeUtil(start, end, node.left);
+        } 
+        
+        if (node.data.compareTo(end) < 0) {
+            findInRangeUtil(start, end, node.right);    // Find in left subtree
+        } 
+        
+        if (start.compareTo((T) node.data) <= 0 
+                && end.compareTo((T) node.data) >= 0) { // Data is in range
+            System.out.println(node.data);
+        }
+    }
+    
+    /**
+     * Validates in the tree built is a valid {BST}
+     * 
+     * @return true in case of a valid {BST}, false otherwise
+     */
+    public boolean isBST(Integer min, Integer max) throws NullPointerException {
+        if (!min.getClass().getSimpleName().equals("Integer") 
+           || !max.getClass().getSimpleName().equals("Integer")) {
+            throw new UnsupportedOperationException("min/max must be of type Integer");
+        } 
+        
+        boolean isBST = isBSTUtil(root, min, max);
+        System.out.println("IsBST? = " + isBST);
+        return isBST;
+    }
+    
+    private boolean isBSTUtil(Node node, Integer min, Integer max) throws NullPointerException {
+        if (min == null || max == null) {
+            throw new NullPointerException("min/max cannot be null");
+        }
+        
+        if (node == null) {
+            return true;
+        }
+        
+        if (node.data.compareTo(min) < 0 && node.data.compareTo(max) > 0) {
+            return false;
+        }
+        
+        return isBSTUtil(node.left, min, (Integer) node.data-1) 
+            && isBSTUtil(node.right, (Integer) node.data+1, max);
+    }
+    
     public static void main(String[] args) throws Exception {        
-        BST bst = new BST();
+        BST<Integer> bst = new BST<Integer>();
         
         // Insert
         bst.insert(new Integer(5));
@@ -357,30 +431,46 @@ public class BST<T extends Comparable<T>> {
         bst.insert(new Integer(7));
         bst.insert(new Integer(6));
         bst.insert(new Integer(8));
+        System.out.println("\n");
         
         // Traversals
         bst.preOrderTraversal();
         bst.inOrderTraversal();
         bst.postOrderTraversal();
         bst.levelOrderTraversal();
+        System.out.println("\n");
         
         // Search
         bst.search(new Integer(0));
+        System.out.println("\n");
         
         // Size
         bst.getSize();
+        System.out.println("\n");
         
         // Height
         bst.getheight();
+        System.out.println("\n");
         
         // Min/Max
         bst.findMin();
         bst.findMax();
+        System.out.println("\n");
         
         // Sum
         bst.findSum();
+        System.out.println("\n");
         
         // Average
         bst.findAverage();
+        System.out.println("\n");
+        
+        // Range statistics
+        bst.findInRange(new Integer(2), new Integer(7));
+        System.out.println("\n");
+        
+        // Is BST?
+        bst.isBST(Integer.MIN_VALUE, Integer.MAX_VALUE);
+        System.out.println("\n");
     }
 }
