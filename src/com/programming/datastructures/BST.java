@@ -403,6 +403,14 @@ public class BST<T extends Comparable<T>> {
         return isBST;
     }
     
+    /**
+     * Utility function to validate if the tree is a valid {BST} 
+     * @param node The root {Node} of the Tree to be evaluated
+     * @param min  The min value for the intended datatype
+     * @param max  The max value for the intended datatype
+     * @return     true if a valid BST, false otherwise
+     * @throws NullPointerException if the provided {Node} instance is null
+     */
     private boolean isBSTUtil(Node node, Integer min, Integer max) throws NullPointerException {
         if (min == null || max == null) {
             throw new NullPointerException("min/max cannot be null");
@@ -420,6 +428,48 @@ public class BST<T extends Comparable<T>> {
             && isBSTUtil(node.right, (Integer) node.data+1, max);
     }
     
+    /**
+     * Checks if the {BST} is height balanced
+     * 
+     * @return true if the {BST} is height balanced, false otherwise
+     */
+    public boolean isBalanced() {
+        boolean isBalanced = checkHeightUtil(root) != Integer.MIN_VALUE;
+        System.out.println("IsBalanced = " + isBalanced);
+        return isBalanced;
+    }
+    
+    /**
+     * Utility function to determine if the {BST} is height balanced. 
+     * 
+     * @param node Current {BST} node
+     * @return Height of the {Node}. {Integer}.MIN_VALUE in case the height is not balanced
+     */
+    private Integer checkHeightUtil(Node node) {
+        if(node==null) {
+            return 0;
+        }
+        
+        Integer leftNodeHeight = checkHeightUtil(node.left);
+        Integer rightNodeHeight = checkHeightUtil(node.right);
+
+        if (leftNodeHeight == Integer.MIN_VALUE) {
+            return Integer.MIN_VALUE;
+        }
+                
+        if (rightNodeHeight == Integer.MIN_VALUE) {
+            return Integer.MIN_VALUE;
+        }
+        
+        Integer heightDifference = leftNodeHeight - rightNodeHeight;
+        
+        if (Math.abs(heightDifference) > 1) {
+            return Integer.MIN_VALUE;
+        } else {
+            return leftNodeHeight + rightNodeHeight + 1;
+        }
+    }
+    
     public static void main(String[] args) throws Exception {        
         BST<Integer> bst = new BST<Integer>();
         
@@ -431,46 +481,39 @@ public class BST<T extends Comparable<T>> {
         bst.insert(new Integer(7));
         bst.insert(new Integer(6));
         bst.insert(new Integer(8));
-        System.out.println("\n");
         
         // Traversals
         bst.preOrderTraversal();
         bst.inOrderTraversal();
         bst.postOrderTraversal();
         bst.levelOrderTraversal();
-        System.out.println("\n");
         
         // Search
         bst.search(new Integer(0));
-        System.out.println("\n");
         
         // Size
         bst.getSize();
-        System.out.println("\n");
         
         // Height
         bst.getheight();
-        System.out.println("\n");
         
         // Min/Max
         bst.findMin();
         bst.findMax();
-        System.out.println("\n");
         
         // Sum
         bst.findSum();
-        System.out.println("\n");
         
         // Average
         bst.findAverage();
-        System.out.println("\n");
         
         // Range statistics
         bst.findInRange(new Integer(2), new Integer(7));
-        System.out.println("\n");
         
         // Is BST?
         bst.isBST(Integer.MIN_VALUE, Integer.MAX_VALUE);
-        System.out.println("\n");
+        
+        // Is Height Balanced?
+        bst.isBalanced();
     }
 }
