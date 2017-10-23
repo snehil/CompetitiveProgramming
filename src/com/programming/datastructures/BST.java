@@ -405,6 +405,7 @@ public class BST<T extends Comparable<T>> {
     
     /**
      * Utility function to validate if the tree is a valid {BST} 
+     * 
      * @param node The root {Node} of the Tree to be evaluated
      * @param min  The min value for the intended datatype
      * @param max  The max value for the intended datatype
@@ -430,6 +431,7 @@ public class BST<T extends Comparable<T>> {
     
     /**
      * Checks if the {BST} is height balanced
+     * Time Complexity = O(n)
      * 
      * @return true if the {BST} is height balanced, false otherwise
      */
@@ -450,7 +452,7 @@ public class BST<T extends Comparable<T>> {
             return 0;
         }
         
-        Integer leftNodeHeight = checkHeightUtil(node.left);
+        Integer leftNodeHeight  = checkHeightUtil(node.left);
         Integer rightNodeHeight = checkHeightUtil(node.right);
 
         if (leftNodeHeight == Integer.MIN_VALUE) {
