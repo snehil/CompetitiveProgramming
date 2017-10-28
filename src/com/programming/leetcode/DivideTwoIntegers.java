@@ -4,7 +4,9 @@ package com.programming.leetcode;
  * Divide two integers without using multiplication, division and mod operator.
  * If it is overflow, return MAX_INT.
  * 
- * @author SW029693
+ * Reference: https://discuss.leetcode.com/topic/15568/detailed-explained-8ms-c-solution/2
+ * 
+ * @author Snehil
  *
  */
 public class DivideTwoIntegers {
