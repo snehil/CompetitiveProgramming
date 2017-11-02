@@ -1,11 +1,13 @@
 package com.programming.leetcode;
 
+/*
+ * http://www.geeksforgeeks.org/write-a-c-program-to-print-all-permutations-of-a-given-string/
+ */
 public class StringPermutations {
     
     public static void main(String[] args) {
-        String str = "snehil";
+        String str = "abcd";
         int counter = 0;
-        
         
         permuteString(str);
     }
